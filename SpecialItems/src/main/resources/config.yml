@@ -1,0 +1,76 @@
+# Item id -> stack settings. display-name / lore use MiniMessage.
+# enchantments: keys like PROTECTION, SHARPNESS (mapped to minecraft ids).
+# attribute-modifiers: amount like חולצת נדרייט — armor 8, armor_toughness 3.
+items:
+  nether_elytra:
+    material: ELYTRA
+    display-name: "<dark_gray>[</dark_gray><gold>אליטרת נדרייט</gold><dark_gray>]</dark_gray>"
+    lore:
+      - "<gray>בלתי שבירה · הגנה כמו חולצת נדרייט + הגנה IV</gray>"
+      - "<dark_gray>Unbreakable · כישוף: Protection IV</dark_gray>"
+    unbreakable: true
+    glow: true
+    custom-model-data: 99001
+    enchantments:
+      PROTECTION: 4
+    attribute-modifiers:
+      - attribute: armor
+        amount: 8.0
+        operation: ADD_NUMBER
+        slot: CHEST
+      - attribute: armor_toughness
+        amount: 3.0
+        operation: ADD_NUMBER
+        slot: CHEST
+
+  void_cookie:
+    material: COOKIE
+    display-name: "<dark_purple>עוגיית הוואיד</dark_purple>"
+    lore:
+      - "<gray>אכילה נותנת דחיפה קלה קדימה.</gray>"
+    glow: true
+    custom-model-data: 99002
+
+  crystal_pick:
+    material: NETHERITE_PICKAXE
+    display-name: "<aqua>מכוש הקריסטל</aqua>"
+    lore:
+      - "<gray>כלי עבודה מסומן כאייטם מיוחד.</gray>"
+    glow: false
+    custom-model-data: 99003
+    enchantments:
+      EFFICIENCY: 5
+      FORTUNE: 3
+
+  freeze_snowball:
+    material: SNOWBALL
+    display-name: "<aqua>כדור שלג מקפיא</aqua>"
+    lore:
+      - "<gray>פגיעה בשחקן מקפיאה אותו ל-30 שניות.</gray>"
+      - "<gray>אם מישהו פוגע בו הוא משתחרר מיד.</gray>"
+      - "<dark_gray>הכדור לא נצרך בזריקה.</dark_gray>"
+    glow: true
+    custom-model-data: 99004
+
+  infinite_rocket:
+    material: FIREWORK_ROCKET
+    display-name: "<light_purple>רוקט אין סופי</light_purple>"
+    lore:
+      - "<gray>רוקט לתעופה שלא נצרך בשימוש.</gray>"
+      - "<gray>מהירות תעופה 1.</gray>"
+    glow: true
+    firework-power: 1
+    custom-model-data: 99005
+
+  master_sword:
+    material: NETHERITE_SWORD
+    display-name: "<red><bold>MASTER SWORD</bold></red>"
+    lore:
+      - "<gray>קליק ימני מחליף יכולת.</gray>"
+      - "<gray>1) כל מכה בלי שנפגעת: הדמג' מוכפל מצטבר.</gray>"
+      - "<gray>2) כל מכה בלי שנפגעת: +1 בלוק טווח.</gray>"
+      - "<dark_gray>כשפוגעים בך - האפקט מתאפס.</dark_gray>"
+    glow: true
+    custom-model-data: 99006
+    enchantments:
+      SHARPNESS: 5

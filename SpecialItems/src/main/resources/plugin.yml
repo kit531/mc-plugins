@@ -1,0 +1,20 @@
+name: SpecialItems
+version: '${version}'
+main: me.adam.specialitems.SpecialItemsPlugin
+api-version: '1.21'
+authors: [Adam]
+description: Custom special items (MiniMessage, PDC, optional abilities)
+
+commands:
+  specialitems:
+    description: List or give special items
+    usage: /<command> list|give <item> [player]
+    aliases: [si, sitems]
+    permission: specialitems.use
+
+permissions:
+  specialitems.use:
+    default: true
+  specialitems.give:
+    default: op
+    description: Give special items to yourself or others
