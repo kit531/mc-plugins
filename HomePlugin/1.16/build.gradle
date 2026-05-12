@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+}
+
+group = 'me.adam'
+version = '1.16.0'
+description = 'Configurable home plugin for Paper 1.16.x'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'papermc'
+        url = 'https://repo.papermc.io/repository/maven-public/'
+    }
+    maven {
+        name = 'sonatype'
+        url = 'https://oss.sonatype.org/content/groups/public/'
+    }
+}
+
+dependencies {
+    compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 11
+}
+
+processResources {
+    def props = [version: version]
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
+
+jar {
+    archiveBaseName.set('HomePlugin-1.16')
+}

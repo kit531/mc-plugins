@@ -1,0 +1,26 @@
+# -1 means unlimited homes per player
+max-homes: -1
+
+# Default teleport delay in seconds
+teleport-delay-seconds: 5
+
+# Default cooldown in seconds between /home uses
+cooldown-seconds: 0
+
+# Message placeholders:
+# {home} {seconds} {max} {list} {remaining}
+messages:
+  prefix: "&8[&b&lHOME&8] &7"
+  home-set: "&a✔ &7הבית &f{home} &7נשמר בהצלחה."
+  home-deleted: "&a✔ &7הבית &f{home} &7נמחק."
+  home-not-found: "&c✘ &7לא נמצא בית בשם &f{home}&7."
+  home-limit: "&c✘ &7הגעת למקסימום בתים: &f{max}&7."
+  home-list-empty: "&eℹ &7עדיין אין לך בתים שמורים."
+  home-list: "&b📍 &7הבתים שלך: &f{list}"
+  teleport-start: "&b⌛ &7משתגר אל &f{home} &7בעוד &f{seconds} &7שניות..."
+  teleported: "&a✔ &7הגעת אל &f{home}&7."
+  cooldown: "&c⏳ &7אפשר להשתמש שוב בעוד &f{remaining} &7שניות."
+  only-player: "&c✘ &7הפקודה זמינה רק לשחקנים."
+  usage-sethome: "&eשימוש: &f/sethome [name]"
+  usage-home: "&eשימוש: &f/home [name]"
+  usage-delhome: "&eשימוש: &f/delhome <name>"

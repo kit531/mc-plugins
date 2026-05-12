@@ -18,6 +18,7 @@ public final class Translations {
         en.put("teleport-start", "&b⌛ &7Teleporting to &f{home} &7in &f{seconds} &7seconds...");
         en.put("teleported", "&a✔ &7Teleported to &f{home}&7.");
         en.put("cooldown", "&c⏳ &7You can use this again in &f{remaining} &7seconds.");
+        en.put("teleport-cancelled-move", "&c✘ &7Teleport to &f{home} &7cancelled because you moved.");
         en.put("only-player", "&c✘ &7This command is only for players.");
         en.put("usage-sethome", "&eUsage: &f/sethome [name]");
         en.put("usage-home", "&eUsage: &f/home [name]");
@@ -39,6 +40,7 @@ public final class Translations {
         he.put("teleport-start", "&b⌛ &7משתגר אל &f{home} &7בעוד &f{seconds} &7שניות...");
         he.put("teleported", "&a✔ &7הגעת אל &f{home}&7.");
         he.put("cooldown", "&c⏳ &7אפשר להשתמש שוב בעוד &f{remaining} &7שניות.");
+        he.put("teleport-cancelled-move", "&c✘ &7השיגור אל &f{home} &7בוטל כי זזת.");
         he.put("only-player", "&c✘ &7הפקודה זמינה רק לשחקנים.");
         he.put("usage-sethome", "&eשימוש: &f/sethome [name]");
         he.put("usage-home", "&eשימוש: &f/home [name]");
@@ -60,6 +62,7 @@ public final class Translations {
         fr.put("teleport-start", "&b⌛ &7Teleportation vers &f{home} &7dans &f{seconds} &7secondes...");
         fr.put("teleported", "&a✔ &7Teleporte vers &f{home}&7.");
         fr.put("cooldown", "&c⏳ &7Reessayez dans &f{remaining} &7secondes.");
+        fr.put("teleport-cancelled-move", "&c✘ &7Teleportation vers &f{home} &7annulee car vous avez bouge.");
         fr.put("only-player", "&c✘ &7Commande reservee aux joueurs.");
         fr.put("usage-sethome", "&eUtilisation: &f/sethome [name]");
         fr.put("usage-home", "&eUtilisation: &f/home [name]");
@@ -81,6 +84,7 @@ public final class Translations {
         es.put("teleport-start", "&b⌛ &7Teletransportando a &f{home} &7en &f{seconds} &7segundos...");
         es.put("teleported", "&a✔ &7Teletransportado a &f{home}&7.");
         es.put("cooldown", "&c⏳ &7Puedes usarlo de nuevo en &f{remaining} &7segundos.");
+        es.put("teleport-cancelled-move", "&c✘ &7El teletransporte a &f{home} &7se cancelo porque te moviste.");
         es.put("only-player", "&c✘ &7Este comando es solo para jugadores.");
         es.put("usage-sethome", "&eUso: &f/sethome [name]");
         es.put("usage-home", "&eUso: &f/home [name]");

@@ -1,1 +1,11 @@
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+}
+
 rootProject.name = 'HomePlugin'
+
+['1.16', '1.17', '1.18', '1.19', '1.20', '1.21', '26.1'].each { mc ->
+    include ":$mc"
+    project(":$mc").projectDir = file(mc)
+    project(":$mc").name = "HomePlugin-$mc"
+}

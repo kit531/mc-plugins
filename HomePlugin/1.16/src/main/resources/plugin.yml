@@ -1,0 +1,45 @@
+name: HomePlugin
+version: '${version}'
+main: me.adam.home.HomePlugin
+api-version: '1.16'
+authors: [Adam]
+description: Homes with configurable limits, delay and cooldown
+
+commands:
+  home:
+    description: "Teleport to one of your saved homes (default: /home home)"
+    usage: |
+      /home [name] - Teleport to a saved home
+      Example: /home base
+      Uses delay/cooldown from config.yml
+    permission: home.use
+  sethome:
+    description: "Save your current location as a home"
+    usage: |
+      /sethome [name] - Save current location
+      Example: /sethome base
+      Allowed name: a-z, 0-9, _ or - (max 32)
+    permission: home.use
+  listhome:
+    description: "Show all your saved homes"
+    usage: |
+      /listhome - List your homes
+    permission: home.use
+  delhome:
+    description: "Delete one of your saved homes"
+    usage: |
+      /delhome <name> - Delete saved home
+      Example: /delhome base
+    permission: home.use
+  language:
+    description: "Change your Home plugin language"
+    usage: |
+      /language home <english|hebrew|french|spanish>
+      Example: /language home hebrew
+    permission: home.use
+
+permissions:
+  home.use:
+    default: true
+  home.admin:
+    default: op

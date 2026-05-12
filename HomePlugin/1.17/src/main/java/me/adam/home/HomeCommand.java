@@ -1,11 +1,17 @@
 package me.adam.home;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,16 +22,20 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
-public final class HomeCommand implements CommandExecutor, TabCompleter {
+public final class HomeCommand implements CommandExecutor, TabCompleter, Listener {
     private static final String DEFAULT_HOME_NAME = "home";
 
     private final HomePlugin plugin;
     private final HomeStorage storage;
     private final Map<UUID, Long> lastHomeUseMs = new HashMap<>();
+    private final Map<UUID, PendingTeleport> pendingTeleports = new HashMap<>();
 
     public HomeCommand(HomePlugin plugin, HomeStorage storage) {
         this.plugin = plugin;
         this.storage = storage;
+    }
+
+    private record PendingTeleport(BukkitTask task, Location startLocation, String homeName) {
     }
 
     @Override
@@ -110,9 +120,14 @@ public final class HomeCommand implements CommandExecutor, TabCompleter {
 
         int delaySeconds = plugin.getConfig().getInt("teleport-delay-seconds", 5);
         plugin.msg(player, "teleport-start", Map.of("home", normalized, "seconds", String.valueOf(delaySeconds)));
-
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+        cancelPendingTeleport(player.getUniqueId(), false);
+        Location start = player.getLocation().clone();
+        BukkitTask task = Bukkit.getScheduler().runTaskLater(plugin, () -> {
             if (!player.isOnline()) {
+                return;
+            }
+            PendingTeleport pending = pendingTeleports.remove(player.getUniqueId());
+            if (pending == null) {
                 return;
             }
             var latest = storage.getHome(player.getUniqueId(), normalized);
@@ -123,6 +138,7 @@ public final class HomeCommand implements CommandExecutor, TabCompleter {
             player.teleport(latest);
             plugin.msg(player, "teleported", Map.of("home", normalized));
         }, Math.max(0, delaySeconds) * 20L);
+        pendingTeleports.put(player.getUniqueId(), new PendingTeleport(task, start, normalized));
 
         return true;
     }
@@ -185,6 +201,42 @@ public final class HomeCommand implements CommandExecutor, TabCompleter {
             return out;
         }
         return Collections.emptyList();
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onMove(PlayerMoveEvent event) {
+        PendingTeleport pending = pendingTeleports.get(event.getPlayer().getUniqueId());
+        if (pending == null) {
+            return;
+        }
+        Location from = event.getFrom();
+        Location to = event.getTo();
+        if (to == null) {
+            return;
+        }
+        if (from.getWorld() == to.getWorld()
+                && from.getBlockX() == to.getBlockX()
+                && from.getBlockY() == to.getBlockY()
+                && from.getBlockZ() == to.getBlockZ()) {
+            return;
+        }
+        cancelPendingTeleport(event.getPlayer().getUniqueId(), true);
+        plugin.msg(event.getPlayer(), "teleport-cancelled-move", Map.of("home", pending.homeName()));
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent event) {
+        cancelPendingTeleport(event.getPlayer().getUniqueId(), false);
+    }
+
+    private void cancelPendingTeleport(UUID uuid, boolean cancelTask) {
+        PendingTeleport pending = pendingTeleports.remove(uuid);
+        if (pending == null) {
+            return;
+        }
+        if (cancelTask) {
+            pending.task().cancel();
+        }
     }
 
     private static List<String> partial(List<String> options, String prefix) {

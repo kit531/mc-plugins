@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+}
+
+group = 'me.adam'
+version = '1.18.0'
+description = 'Configurable home plugin for Paper 1.18.x'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'papermc'
+        url = 'https://repo.papermc.io/repository/maven-public/'
+    }
+}
+
+dependencies {
+    compileOnly 'io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 17
+}
+
+processResources {
+    def props = [version: version]
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
+
+jar {
+    archiveBaseName.set('HomePlugin-1.18')
+}
