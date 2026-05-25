@@ -1,0 +1,38 @@
+name: TpaPlugin
+version: '${version}'
+main: me.adam.tpa.TpaPlugin
+api-version: '1.20'
+authors: [Adam]
+description: Teleport requests with delay, movement cancel, and multilingual messages
+
+commands:
+  tpa:
+    description: Send a teleport request to a player
+    usage: |
+      /tpa <player> - Ask to teleport to that player
+      Example: /tpa Steve
+    permission: tpa.use
+  tpaccept:
+    description: Accept the latest incoming teleport request
+    usage: /tpaccept
+    permission: tpa.use
+  tpdeny:
+    description: Deny the latest incoming teleport request
+    usage: /tpdeny
+    permission: tpa.use
+  tpacancel:
+    description: Cancel your outgoing teleport request
+    usage: /tpacancel
+    permission: tpa.use
+  language:
+    description: Change your TPA plugin language
+    usage: |
+      /language tpa <english|hebrew|french|spanish>
+      Example: /language tpa hebrew
+    permission: tpa.use
+
+permissions:
+  tpa.use:
+    default: true
+  tpa.admin:
+    default: op

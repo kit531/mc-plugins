@@ -1,0 +1,11 @@
+tasks.register('buildAll') {
+    group = 'build'
+    description = 'Build all TpaPlugin Minecraft version variants.'
+    dependsOn subprojects.collect { it.tasks.named('build') }
+}
+
+tasks.register('cleanAll') {
+    group = 'build'
+    description = 'Clean all TpaPlugin Minecraft version variants.'
+    dependsOn subprojects.collect { it.tasks.named('clean') }
+}

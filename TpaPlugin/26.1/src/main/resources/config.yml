@@ -1,0 +1,11 @@
+# Seconds to wait after /tpaccept before teleporting the requester
+teleport-delay-seconds: 5
+
+# Cancel the pending teleport if the player moves during the delay
+cancel-teleport-on-move: true
+
+# How long an incoming request stays valid (0 = until deny/cancel/accept)
+request-timeout-seconds: 60
+
+# Cooldown between /tpa commands per player (0 = disabled)
+tpa-cooldown-seconds: 0
