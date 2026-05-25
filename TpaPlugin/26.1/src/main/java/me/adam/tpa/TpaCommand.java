@@ -67,7 +67,9 @@ public final class TpaCommand implements CommandExecutor, TabCompleter, Listener
         String cmd = command.getName().toLowerCase(Locale.ROOT);
         switch (cmd) {
             case "tpa":
-                return handleTpa(player, args);
+                return handleTpa(player, args, TpaRequestManager.RequestType.TO_TARGET);
+            case "tpahere":
+                return handleTpa(player, args, TpaRequestManager.RequestType.TO_SENDER);
             case "tpaccept":
                 return handleTpAccept(player);
             case "tpdeny":
@@ -81,9 +83,9 @@ public final class TpaCommand implements CommandExecutor, TabCompleter, Listener
         }
     }
 
-    private boolean handleTpa(Player sender, String[] args) {
+    private boolean handleTpa(Player sender, String[] args, TpaRequestManager.RequestType type) {
         if (args.length < 1) {
-            plugin.msg(sender, "usage-tpa", null);
+            plugin.msg(sender, type == TpaRequestManager.RequestType.TO_TARGET ? "usage-tpa" : "usage-tpahere", null);
             return true;
         }
         Player target = Bukkit.getPlayerExact(args[0]);
@@ -114,9 +116,14 @@ public final class TpaCommand implements CommandExecutor, TabCompleter, Listener
             return true;
         }
 
-        requestManager.putRequest(sender.getUniqueId(), target.getUniqueId());
-        plugin.msg(sender, "tpa-sent", Map.of("player", target.getName()));
-        plugin.msg(target, "tpa-received", Map.of("player", sender.getName()));
+        requestManager.putRequest(sender.getUniqueId(), target.getUniqueId(), type);
+        if (type == TpaRequestManager.RequestType.TO_TARGET) {
+            plugin.msg(sender, "tpa-sent", Map.of("player", target.getName()));
+            plugin.msg(target, "tpa-received", Map.of("player", sender.getName()));
+        } else {
+            plugin.msg(sender, "tpahere-sent", Map.of("player", target.getName()));
+            plugin.msg(target, "tpahere-received", Map.of("player", sender.getName()));
+        }
         return true;
     }
 
@@ -135,10 +142,15 @@ public final class TpaCommand implements CommandExecutor, TabCompleter, Listener
         }
 
         requestManager.removeIncoming(target.getUniqueId());
-        plugin.msg(target, "tpa-accepted-target", Map.of("player", sender.getName()));
-        plugin.msg(sender, "tpa-accepted-sender", Map.of("player", target.getName()));
-
-        startTeleport(sender, target);
+        if (request.type() == TpaRequestManager.RequestType.TO_TARGET) {
+            plugin.msg(target, "tpa-accepted-target", Map.of("player", sender.getName()));
+            plugin.msg(sender, "tpa-accepted-sender", Map.of("player", target.getName()));
+            startTeleport(sender, target);
+        } else {
+            plugin.msg(target, "tpahere-accepted-target", Map.of("player", sender.getName()));
+            plugin.msg(sender, "tpahere-accepted-sender", Map.of("player", target.getName()));
+            startTeleport(target, sender);
+        }
         return true;
     }
 
@@ -230,7 +242,7 @@ public final class TpaCommand implements CommandExecutor, TabCompleter, Listener
             }
             return Collections.emptyList();
         }
-        if (cmd.equals("tpa") && args.length == 1) {
+        if ((cmd.equals("tpa") || cmd.equals("tpahere")) && args.length == 1) {
             String prefix = args[0].toLowerCase(Locale.ROOT);
             List<String> out = new ArrayList<>();
             for (Player online : Bukkit.getOnlinePlayers()) {

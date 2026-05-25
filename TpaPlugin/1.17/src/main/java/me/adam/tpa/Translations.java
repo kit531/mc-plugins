@@ -11,6 +11,7 @@ public final class Translations {
         en.put("prefix", "&8[&d&lTPA&8] &7");
         en.put("only-player", "&c✘ &7This command is only for players.");
         en.put("usage-tpa", "&eUsage: &f/tpa <player>");
+        en.put("usage-tpahere", "&eUsage: &f/tpahere <player>");
         en.put("usage-language", "&eUsage: &f/language tpa <english|hebrew|french|spanish>");
         en.put("language-set", "&a✔ &7TPA language set to &f{language}&7.");
         en.put("language-unknown", "&c✘ &7Unknown language. Use: &fenglish/hebrew/french/spanish");
@@ -20,6 +21,10 @@ public final class Translations {
         en.put("tpa-already-sent", "&c✘ &7You already have an outgoing request. Use &f/tpacancel&7.");
         en.put("tpa-sent", "&a✔ &7Teleport request sent to &f{player}&7.");
         en.put("tpa-received", "&b📨 &f{player} &7wants to teleport to you. &f/tpaccept &7or &f/tpdeny&7.");
+        en.put("tpahere-sent", "&a✔ &7Asked &f{player} &7to teleport to you.");
+        en.put("tpahere-received", "&b📨 &f{player} &7wants you to teleport to them. &f/tpaccept &7or &f/tpdeny&7.");
+        en.put("tpahere-accepted-target", "&a✔ &7You will teleport to &f{player}&7.");
+        en.put("tpahere-accepted-sender", "&a✔ &f{player} &7is teleporting to you.");
         en.put("tpa-none-incoming", "&c✘ &7You have no incoming teleport requests.");
         en.put("tpa-none-outgoing", "&c✘ &7You have no outgoing teleport request.");
         en.put("tpa-accepted-target", "&a✔ &7You accepted &f{player}&7's request.");
@@ -38,6 +43,7 @@ public final class Translations {
         he.put("prefix", "&8[&d&lTPA&8] &7");
         he.put("only-player", "&c✘ &7הפקודה זמינה רק לשחקנים.");
         he.put("usage-tpa", "&eשימוש: &f/tpa <player>");
+        he.put("usage-tpahere", "&eשימוש: &f/tpahere <player>");
         he.put("usage-language", "&eשימוש: &f/language tpa <english|hebrew|french|spanish>");
         he.put("language-set", "&a✔ &7שפת הפלאגין הוגדרה ל־&f{language}&7.");
         he.put("language-unknown", "&c✘ &7שפה לא מוכרת. אפשר: &fenglish/hebrew/french/spanish");
@@ -47,6 +53,10 @@ public final class Translations {
         he.put("tpa-already-sent", "&c✘ &7כבר יש לך בקשה פעילה. השתמש ב־&f/tpacancel&7.");
         he.put("tpa-sent", "&a✔ &7בקשת שיגור נשלחה אל &f{player}&7.");
         he.put("tpa-received", "&b📨 &f{player} &7רוצה להשתגר אליך. &f/tpaccept &7או &f/tpdeny&7.");
+        he.put("tpahere-sent", "&a✔ &7ביקשת מ־&f{player} &7להשתגר אליך.");
+        he.put("tpahere-received", "&b📨 &f{player} &7רוצה שתשתגר אליו. &f/tpaccept &7או &f/tpdeny&7.");
+        he.put("tpahere-accepted-target", "&a✔ &7תשתגר אל &f{player}&7.");
+        he.put("tpahere-accepted-sender", "&a✔ &f{player} &7משתגר אליך.");
         he.put("tpa-none-incoming", "&c✘ &7אין לך בקשות שיגור נכנסות.");
         he.put("tpa-none-outgoing", "&c✘ &7אין לך בקשת שיגור יוצאת.");
         he.put("tpa-accepted-target", "&a✔ &7אישרת את הבקשה של &f{player}&7.");
@@ -65,6 +75,7 @@ public final class Translations {
         fr.put("prefix", "&8[&d&lTPA&8] &7");
         fr.put("only-player", "&c✘ &7Commande reservee aux joueurs.");
         fr.put("usage-tpa", "&eUtilisation: &f/tpa <player>");
+        fr.put("usage-tpahere", "&eUtilisation: &f/tpahere <player>");
         fr.put("usage-language", "&eUtilisation: &f/language tpa <english|hebrew|french|spanish>");
         fr.put("language-set", "&a✔ &7Langue du plugin definie sur &f{language}&7.");
         fr.put("language-unknown", "&c✘ &7Langue inconnue. Utilisez: &fenglish/hebrew/french/spanish");
@@ -74,6 +85,10 @@ public final class Translations {
         fr.put("tpa-already-sent", "&c✘ &7Vous avez deja une demande active. Utilisez &f/tpacancel&7.");
         fr.put("tpa-sent", "&a✔ &7Demande envoyee a &f{player}&7.");
         fr.put("tpa-received", "&b📨 &f{player} &7veut se teleporter vers vous. &f/tpaccept &7ou &f/tpdeny&7.");
+        fr.put("tpahere-sent", "&a✔ &7Vous avez demande a &f{player} &7de venir vers vous.");
+        fr.put("tpahere-received", "&b📨 &f{player} &7veut que vous vous teleportiez vers lui. &f/tpaccept &7ou &f/tpdeny&7.");
+        fr.put("tpahere-accepted-target", "&a✔ &7Vous allez vous teleporter vers &f{player}&7.");
+        fr.put("tpahere-accepted-sender", "&a✔ &f{player} &7se teleporte vers vous.");
         fr.put("tpa-none-incoming", "&c✘ &7Vous n'avez aucune demande entrante.");
         fr.put("tpa-none-outgoing", "&c✘ &7Vous n'avez aucune demande sortante.");
         fr.put("tpa-accepted-target", "&a✔ &7Vous avez accepte la demande de &f{player}&7.");
@@ -92,6 +107,7 @@ public final class Translations {
         es.put("prefix", "&8[&d&lTPA&8] &7");
         es.put("only-player", "&c✘ &7Este comando es solo para jugadores.");
         es.put("usage-tpa", "&eUso: &f/tpa <player>");
+        es.put("usage-tpahere", "&eUso: &f/tpahere <player>");
         es.put("usage-language", "&eUso: &f/language tpa <english|hebrew|french|spanish>");
         es.put("language-set", "&a✔ &7Idioma del plugin cambiado a &f{language}&7.");
         es.put("language-unknown", "&c✘ &7Idioma desconocido. Usa: &fenglish/hebrew/french/spanish");
@@ -101,6 +117,10 @@ public final class Translations {
         es.put("tpa-already-sent", "&c✘ &7Ya tienes una solicitud activa. Usa &f/tpacancel&7.");
         es.put("tpa-sent", "&a✔ &7Solicitud enviada a &f{player}&7.");
         es.put("tpa-received", "&b📨 &f{player} &7quiere teletransportarse hacia ti. &f/tpaccept &7o &f/tpdeny&7.");
+        es.put("tpahere-sent", "&a✔ &7Pediste a &f{player} &7que se teletransporte hacia ti.");
+        es.put("tpahere-received", "&b📨 &f{player} &7quiere que te teletransportes hacia el. &f/tpaccept &7o &f/tpdeny&7.");
+        es.put("tpahere-accepted-target", "&a✔ &7Te teletransportaras a &f{player}&7.");
+        es.put("tpahere-accepted-sender", "&a✔ &f{player} &7se esta teletransportando hacia ti.");
         es.put("tpa-none-incoming", "&c✘ &7No tienes solicitudes entrantes.");
         es.put("tpa-none-outgoing", "&c✘ &7No tienes una solicitud saliente.");
         es.put("tpa-accepted-target", "&a✔ &7Aceptaste la solicitud de &f{player}&7.");

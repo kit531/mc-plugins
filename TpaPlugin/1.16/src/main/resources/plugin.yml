@@ -12,6 +12,12 @@ commands:
       /tpa <player> - Ask to teleport to that player
       Example: /tpa Steve
     permission: tpa.use
+  tpahere:
+    description: Ask a player to teleport to you
+    usage: |
+      /tpahere <player> - Ask that player to teleport to you
+      Example: /tpahere Steve
+    permission: tpa.use
   tpaccept:
     description: Accept the latest incoming teleport request
     usage: /tpaccept

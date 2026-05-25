@@ -27,6 +27,7 @@ TpaPlugin/
 | Command | Description |
 |---------|-------------|
 | `/tpa <player>` | Send a teleport request (you teleport to them on accept). |
+| `/tpahere <player>` | Ask a player to teleport to you (they come to you on accept). |
 | `/tpaccept` | Accept the latest incoming request. |
 | `/tpdeny` | Deny the latest incoming request. |
 | `/tpacancel` | Cancel your outgoing request. |

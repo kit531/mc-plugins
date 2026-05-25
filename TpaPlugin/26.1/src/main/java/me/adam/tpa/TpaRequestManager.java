@@ -23,13 +23,20 @@ public final class TpaRequestManager {
         return incomingByTarget.get(target);
     }
 
-    public synchronized void putRequest(UUID sender, UUID target) {
+    public synchronized void putRequest(UUID sender, UUID target, RequestType type) {
         removeOutgoing(sender);
         removeIncomingForTarget(target);
 
-        TpaRequest request = new TpaRequest(sender, target, System.currentTimeMillis());
+        TpaRequest request = new TpaRequest(sender, target, type, System.currentTimeMillis());
         incomingByTarget.put(target, request);
         outgoingBySender.put(sender, target);
+    }
+
+    public enum RequestType {
+        /** Sender teleports to target on accept. */
+        TO_TARGET,
+        /** Target teleports to sender on accept. */
+        TO_SENDER
     }
 
     public synchronized TpaRequest removeIncoming(UUID target) {
@@ -92,11 +99,13 @@ public final class TpaRequestManager {
     public static final class TpaRequest {
         private final UUID sender;
         private final UUID target;
+        private final RequestType type;
         private final long createdAtMs;
 
-        public TpaRequest(UUID sender, UUID target, long createdAtMs) {
+        public TpaRequest(UUID sender, UUID target, RequestType type, long createdAtMs) {
             this.sender = sender;
             this.target = target;
+            this.type = type;
             this.createdAtMs = createdAtMs;
         }
 
@@ -106,6 +115,10 @@ public final class TpaRequestManager {
 
         public UUID target() {
             return target;
+        }
+
+        public RequestType type() {
+            return type;
         }
 
         public long createdAtMs() {

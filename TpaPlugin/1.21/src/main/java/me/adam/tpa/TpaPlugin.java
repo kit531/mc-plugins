@@ -22,6 +22,8 @@ public final class TpaPlugin extends JavaPlugin {
         getServer().getPluginManager().registerEvents(commandHandler, this);
         getCommand("tpa").setExecutor(commandHandler);
         getCommand("tpa").setTabCompleter(commandHandler);
+        getCommand("tpahere").setExecutor(commandHandler);
+        getCommand("tpahere").setTabCompleter(commandHandler);
         getCommand("tpaccept").setExecutor(commandHandler);
         getCommand("tpdeny").setExecutor(commandHandler);
         getCommand("tpacancel").setExecutor(commandHandler);
