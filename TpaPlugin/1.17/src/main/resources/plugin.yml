@@ -1,8 +1,7 @@
 name: TpaPlugin
 version: '${version}'
-main: me.adam.tpa.TpaPlugin
+main: me.tpaplugin.TpaPlugin
 api-version: '1.17'
-authors: [Adam]
 description: Teleport requests with delay, movement cancel, and multilingual messages
 
 commands:
@@ -29,12 +28,6 @@ commands:
   tpacancel:
     description: Cancel your outgoing teleport request
     usage: /tpacancel
-    permission: tpa.use
-  language:
-    description: Change your TPA plugin language
-    usage: |
-      /language tpa <english|hebrew|french|spanish>
-      Example: /language tpa hebrew
     permission: tpa.use
 
 permissions:

@@ -31,7 +31,7 @@ TpaPlugin/
 | `/tpaccept` | Accept the latest incoming request. |
 | `/tpdeny` | Deny the latest incoming request. |
 | `/tpacancel` | Cancel your outgoing request. |
-| `/language tpa <english\|hebrew\|french\|spanish>` | Change plugin language. |
+| `/language <english\|hebrew\|french\|spanish>` | Change language (HomePlugin command, shared with TPA). |
 
 ## Config (`config.yml`)
 

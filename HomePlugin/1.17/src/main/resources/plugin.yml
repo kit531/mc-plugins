@@ -1,8 +1,7 @@
 name: HomePlugin
 version: '${version}'
-main: me.adam.home.HomePlugin
+main: me.homeplugin.HomePlugin
 api-version: '1.17'
-authors: [Adam]
 description: Homes with configurable limits, delay and cooldown
 
 commands:
@@ -30,12 +29,6 @@ commands:
     usage: |
       /delhome <name> - Delete saved home
       Example: /delhome base
-    permission: home.use
-  language:
-    description: "Change your Home plugin language"
-    usage: |
-      /language home <english|hebrew|french|spanish>
-      Example: /language home hebrew
     permission: home.use
 
 permissions:

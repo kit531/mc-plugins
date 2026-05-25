@@ -2,7 +2,7 @@ plugins {
     id 'java'
 }
 
-group = 'me.adam'
+group = 'me.tpaplugin'
 version = '1.20.0'
 description = 'Configurable teleport request plugin for Paper 1.20.x'
 

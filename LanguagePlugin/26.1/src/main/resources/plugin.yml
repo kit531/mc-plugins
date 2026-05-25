@@ -1,0 +1,17 @@
+name: LanguagePlugin
+version: '${version}'
+main: me.languageplugin.LanguagePlugin
+api-version: '26.1'
+description: Shared language command for all plugins
+load: STARTUP
+
+commands:
+  language:
+    description: Set your chat language for server plugins
+    usage: /language <english|hebrew|french|spanish>
+    permission: language.use
+    aliases: [lang]
+
+permissions:
+  language.use:
+    default: true

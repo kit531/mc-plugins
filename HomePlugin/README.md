@@ -46,4 +46,4 @@ Clean everything:
 | `/home [name]`    | Teleport to a saved home (with delay).     |
 | `/listhome`       | List saved homes.                          |
 | `/delhome <name>` | Delete a saved home.                       |
-| `/language home <english\|hebrew\|french\|spanish>` | Change plugin language for yourself. |
+| `/language <english\|hebrew\|french\|spanish>` | Change language for Home and TPA plugins. |
