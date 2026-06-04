@@ -29,12 +29,14 @@ public final class TpaPlugin extends JavaPlugin {
 
     public void msg(CommandSender sender, String key, Map<String, String> placeholders) {
         String lang = "en";
+        UUID playerId = null;
         if (sender instanceof Player) {
             Player player = (Player) sender;
-            lang = getPlayerLanguage(player.getUniqueId());
+            playerId = player.getUniqueId();
+            lang = getPlayerLanguage(playerId);
         }
-        String prefix = color(Translations.resolve(lang, "prefix"));
-        String body = color(Translations.resolve(lang, key));
+        String prefix = color(TranslationBridge.resolve(this, playerId, lang, "prefix"));
+        String body = color(TranslationBridge.resolve(this, playerId, lang, key));
         if (placeholders != null) {
             for (Map.Entry<String, String> entry : placeholders.entrySet()) {
                 body = body.replace("{" + entry.getKey() + "}", entry.getValue());
