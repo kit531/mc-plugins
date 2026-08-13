@@ -1,0 +1,63 @@
+name: CheckPoints Release
+
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - 'CheckPoints/**'
+      - '.github/workflows/checkpoints-release.yml'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: CheckPoints
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Build
+        run: ./gradlew build --no-daemon
+
+      # Only a bumped `version = '...'` in build.gradle produces a new
+      # release - pushing without a version bump just verifies the build,
+      # so ordinary commits don't spam the releases list.
+      - name: Read version
+        id: version
+        run: |
+          VERSION=$(grep -m1 "^version" build.gradle | sed -E "s/version = '(.*)'/\1/")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=checkpoints-v$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Check if this version was already released
+        id: exists
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh release view "${{ steps.version.outputs.tag }}" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish release
+        if: steps.exists.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ steps.version.outputs.tag }}" \
+            build/libs/CheckPoints.jar \
+            compat.json \
+            --repo "${{ github.repository }}" \
+            --title "CheckPoints ${{ steps.version.outputs.version }}" \
+            --notes "Automated release from CI. Compatible Minecraft versions: see compat.json."
