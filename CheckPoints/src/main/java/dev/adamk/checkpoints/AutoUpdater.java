@@ -47,7 +47,13 @@ public final class AutoUpdater implements Listener {
 	private static final Duration TIMEOUT = Duration.ofSeconds(10);
 
 	private final CheckPointsPlugin plugin;
-	private final HttpClient http = HttpClient.newBuilder().connectTimeout(TIMEOUT).build();
+	// GitHub's asset download URLs (browser_download_url) are 302 redirects to
+	// a signed release-assets.githubusercontent.com URL - the default
+	// Redirect.NEVER would treat every download as a failure.
+	private final HttpClient http = HttpClient.newBuilder()
+			.connectTimeout(TIMEOUT)
+			.followRedirects(HttpClient.Redirect.NORMAL)
+			.build();
 
 	// Set once an update has actually been staged this run, so newly joining
 	// OPs get told about it even though console output already scrolled by.
