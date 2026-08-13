@@ -1,0 +1,66 @@
+name: CheckPoints
+version: '${version}'
+main: dev.adamk.checkpoints.CheckPointsPlugin
+api-version: '1.20.5'
+description: Pressure-plate checkpoints - stepping on one sets your respawn point, teleports you, runs a command, grants an effect, launches you, or clocks a parkour course. Supports invisible plates and floating name tags. Requires 1.20.5+ (uses the block-interaction-range attribute).
+author: Adam
+commands:
+  checkpoint:
+    description: Create and configure checkpoint plates and buttons. "new" builds one in a single command; most other sub-commands edit the point you stand on or look at. "course top" is open to everyone; everything else needs checkpoints.create.
+    usage: /checkpoint [new <type> [-i] [-p particle] [-s sound] [-a anim] [-d "death msg"] [-heal] [name]|reset|kill|name <text>|target|command <cmd>|effect <spec>|launch <fwd,up>|permission <node>|cooldown <sec>|once|course <name>|course top [name]|role <role>|message <text>|msgmode <mode>|particle <type>|particlemode <mode>|sound <name>|anim <effect>|heal|deathmsg <text>|info|list|copy|paste|undo]
+    aliases: [cp]
+  respawn:
+    description: Teleport to your respawn point (checkpoint, bed or world spawn)
+    permission: checkpoints.respawn
+    usage: /respawn
+  resetrespawn:
+    description: Reset your own respawn point back to the world default
+    permission: checkpoints.resetrespawn
+    usage: /resetrespawn
+    aliases: [rr]
+  guide:
+    description: Get a clickable link to the CheckPoints guide
+    permission: checkpoints.guide
+    usage: /guide
+    aliases: [cpguide]
+  lock:
+    description: Lock the door, trapdoor, fence gate or armour stand you are looking at
+    permission: checkpoints.lock
+    usage: /lock
+  unlock:
+    description: Unlock the door, trapdoor, fence gate or armour stand you are looking at
+    permission: checkpoints.lock
+    usage: /unlock
+  invisibleplate:
+    description: Get an invisible pressure plate (not a checkpoint - still works with redstone)
+    permission: checkpoints.create
+    usage: /invisibleplate
+    aliases: [invsplate]
+permissions:
+  checkpoints.create:
+    default: op
+  checkpoints.lock:
+    description: Lock and unlock things, and use anything that is locked
+    default: op
+  checkpoints.respawn:
+    default: true
+  checkpoints.resetrespawn:
+    default: true
+  checkpoints.guide:
+    default: true
+  checkpoints.color.basic:
+    description: Use colour and format codes (&a, &l, <red>, <bold>) in floating names
+    default: true
+  checkpoints.color.hex:
+    description: Use hex RGB colours (&#FF5555, <#FF5555>)
+    default: op
+  checkpoints.color.gradient:
+    description: Use gradients, rainbow and transitions
+    default: op
+  checkpoints.color.*:
+    description: Every colour and formatting option
+    default: op
+    children:
+      checkpoints.color.basic: true
+      checkpoints.color.hex: true
+      checkpoints.color.gradient: true
